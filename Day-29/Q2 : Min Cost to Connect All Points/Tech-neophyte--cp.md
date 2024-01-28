@@ -105,6 +105,7 @@ public:
 };
 ```
 ## Python code:
+```
 class Solution:
     def minCostConnectPoints(self, points: List[List[int]]) -> int:
         n = len(points)
@@ -143,3 +144,4 @@ class Solution:
                         heapq.heappush(min_heap, (manhattan_dist, i))
         
         return total_cost
+```
