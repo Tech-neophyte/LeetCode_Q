@@ -1,19 +1,16 @@
 ## Cpp code: Using Krushkal's algorithm:
+```
 class Solution {
 public:
     int minCostConnectPoints(vector<vector<int>>& points) {
          int n = points.size();
     vector<pair<int, pair<int, int>>> edges; // {cost, {point1, point2}}
-
-    // Calculate the Manhattan distance between all pairs of points and store them as edges.
     for (int i = 0; i < n; ++i) {
         for (int j = i + 1; j < n; ++j) {
             int cost = abs(points[i][0] - points[j][0]) + abs(points[i][1] - points[j][1]);
             edges.push_back({cost, {i, j}});
         }
     }
-
-    // Sort edges in ascending order of cost.
     sort(edges.begin(), edges.end());
 
     vector<int> parent(n);
@@ -26,7 +23,7 @@ public:
     int minCost = 0;
     int numEdges = 0;
 
-    // Kruskal's algorithm to find the MST.
+    // Kruskal's algorithm
     for (auto& edge : edges) {
         int cost = edge.first;
         int u = edge.second.first;
@@ -62,3 +59,4 @@ public:
 }
 
 };
+```
