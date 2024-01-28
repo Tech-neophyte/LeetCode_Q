@@ -104,3 +104,42 @@ public:
     }
 };
 ```
+## Python code:
+class Solution:
+    def minCostConnectPoints(self, points: List[List[int]]) -> int:
+        n = len(points)
+        if n <= 1:
+            return 0
+        
+        # Initialize the total cost and a set to track visited nodes
+        total_cost = 0
+        visited = set()
+        
+        # Initialize distances with a maximum value for each point
+        distances = [float('inf')] * n
+        
+        # Choose the starting node 
+        start_node = 0
+        distances[start_node] = 0
+        
+        min_heap = [(0, start_node)]  # Priority queue to select the minimum distance
+        
+        while min_heap:
+            dist, current = heapq.heappop(min_heap)
+            
+            if current in visited:
+                continue
+            
+            visited.add(current)
+            total_cost += dist
+            
+            for i in range(n):
+                if i not in visited:
+                    # Calculate Manhattan distance between points
+                    manhattan_dist = abs(points[current][0] - points[i][0]) + abs(points[current][1] - points[i][1])
+                    
+                    if manhattan_dist < distances[i]:
+                        distances[i] = manhattan_dist
+                        heapq.heappush(min_heap, (manhattan_dist, i))
+        
+        return total_cost
